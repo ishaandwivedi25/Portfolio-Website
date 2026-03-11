@@ -11,34 +11,25 @@ npm run dev
 
 Open http://localhost:3000.
 
-## Deploy on GitHub Pages (correct way)
+## Run directly on GitHub (GitHub Pages)
 
-If you see `README.md` at your Pages URL, your repository is currently publishing from a branch folder instead of from the GitHub Actions artifact.
+This repo is configured to deploy automatically with GitHub Actions.
 
-### 1) Set Pages source correctly
+### 1) Push to `main`
+The workflow at `.github/workflows/deploy.yml` runs on every push to `main` and exports the site to static files.
+
+### 2) Enable Pages in repo settings
 In **GitHub → Settings → Pages**:
 - **Source**: **GitHub Actions**
 
-Do **not** use “Deploy from a branch” for this setup.
-
-### 2) Push to `main`
-This repository includes `.github/workflows/deploy.yml`, which:
-- installs dependencies
-- builds the Next.js static export
-- uploads `out/` as the Pages artifact
-- deploys it automatically
-
-### 3) Confirm workflow success
-In **GitHub → Actions**, make sure **Deploy Next.js site to GitHub Pages** completes successfully.
-
-### 4) Open your live site
-Your URL will be:
+### 3) Wait for deployment
+After the workflow succeeds, your site will be available at:
 
 ```text
 https://<your-github-username>.github.io/<repository-name>/
 ```
 
-> `next.config.mjs` already sets `basePath` and `assetPrefix` automatically in GitHub Actions.
+> `next.config.mjs` already sets the correct `basePath` and `assetPrefix` during GitHub Actions builds.
 
 ## Edit content
 
